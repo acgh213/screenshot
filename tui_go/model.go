@@ -43,7 +43,8 @@ type Model struct {
 	settings     Settings
 
 	// Data
-	manifest Manifest
+	manifest   Manifest
+	statsCache *StatsCache
 
 	// UI state
 	state        viewState
@@ -59,13 +60,15 @@ type Model struct {
 	queue map[string]bool
 
 	// Busy state
-	busy        bool
-	busyMsg     string
-	progressN   int
-	progressMax int
-	cancelFn    context.CancelFunc
-	scanner     *bufio.Scanner
-	subproc     *exec.Cmd
+	busy            bool
+	busyMsg         string
+	progressN       int
+	progressMax     int
+	catalogStart    time.Time
+	etaStr          string
+	cancelFn        context.CancelFunc
+	scanner         *bufio.Scanner
+	subproc         *exec.Cmd
 
 	// Confirm
 	confirmMsg    string
@@ -93,6 +96,7 @@ func NewModel(scanDir, manifestPath string) Model {
 		manifestPath: manifestPath,
 		settings:     settings,
 		manifest:     manifest,
+		statsCache:   BuildStatsCache(manifest),
 		tree:         tree,
 		queue:        map[string]bool{},
 		dupeMarked:   map[string]bool{},
@@ -123,8 +127,20 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		if msg.Type == "start" {
 			m.progressMax = msg.Total
 			m.progressN = 0
+			m.catalogStart = time.Now()
+			m.etaStr = ""
 		} else if msg.Type == "progress" {
 			m.progressN++
+			if m.progressN > 0 && m.progressMax > 0 {
+				elapsed := time.Since(m.catalogStart)
+				if elapsed > 0 {
+					perItem := elapsed / time.Duration(m.progressN)
+					remaining := perItem * time.Duration(m.progressMax-m.progressN)
+					if remaining > 0 {
+						m.etaStr = fmt.Sprintf(" ETA %s", formatDuration(remaining))
+					}
+				}
+			}
 		}
 		if m.scanner != nil {
 			return m, ReadNextMsg(m.scanner, m.subproc)
@@ -144,6 +160,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		if err == nil {
 			m.manifest = freshManifest
 			m.tree.SetManifest(m.manifest)
+			m.statsCache = BuildStatsCache(m.manifest)
 		}
 		if msg.Err != nil && msg.Err.Error() != "" && !strings.Contains(msg.Err.Error(), "killed") {
 			m.appendLog(styleError.Render(fmt.Sprintf("⚠  %v", msg.Err)))
@@ -272,7 +289,7 @@ func (m Model) handleKey(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 		m.state = stateLibrary
 		return m, nil
 	case "p":
-		m.stats = NewStatsModel(m.manifest, m.width, m.height)
+		m.stats = NewStatsModel(m.manifest, m.statsCache, m.width, m.height)
 		m.state = stateStats
 		return m, nil
 	case "t":
@@ -1005,7 +1022,11 @@ func (m Model) statusBarView() string {
 		if m.progressMax > 0 {
 			progress = fmt.Sprintf(" %d/%d", m.progressN, m.progressMax)
 		}
-		left := styleWarning.Render("  "+m.busyMsg+progress)
+		eta := ""
+		if m.etaStr != "" {
+			eta = styleInfo.Render(m.etaStr)
+		}
+		left := styleWarning.Render("  "+m.busyMsg+progress) + eta
 		right := keyHint("ESC", "cancel") + "  "
 		spacer := strings.Repeat(" ", max(0, m.width-lipgloss.Width(left)-lipgloss.Width(right)-2))
 		return styleStatusBar.Render(left + spacer + right)
@@ -1118,6 +1139,24 @@ func (m Model) dupesView() string {
 			keyHint("ESC", "back"),
 	)
 	return strings.Join(lines, "\n") + "\n" + statusBar
+}
+
+func formatDuration(d time.Duration) string {
+	d = d.Round(time.Second)
+	if d < time.Minute {
+		return fmt.Sprintf("%ds", int(d.Seconds()))
+	}
+	m := int(d.Minutes())
+	s := int(d.Seconds()) % 60
+	if m >= 60 {
+		h := m / 60
+		m = m % 60
+		return fmt.Sprintf("%dh%dm", h, m)
+	}
+	if s == 0 {
+		return fmt.Sprintf("%dm", m)
+	}
+	return fmt.Sprintf("%dm%ds", m, s)
 }
 
 func max(a, b int) int {

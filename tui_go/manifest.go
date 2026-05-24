@@ -173,7 +173,14 @@ type UndoEntry struct {
 }
 
 // SuggestFilename builds a descriptive filename for an entry.
+// Truncates individual parts and total to keep filenames usable on Windows.
 func SuggestFilename(e *Entry, orig string) string {
+	// Max total filename length (without extension) — Windows MAX_PATH is 255,
+	// but descriptive filenames over ~80 chars are unwieldy.
+	const maxTotal = 72
+	// Max individual segment before truncation
+	const maxSegment = 28
+
 	sanitize := func(s string) string {
 		s = strings.ReplaceAll(s, " ", "-")
 		s = strings.ReplaceAll(s, ":", "")
@@ -184,8 +191,16 @@ func SuggestFilename(e *Entry, orig string) string {
 				b.WriteRune(r)
 			}
 		}
-		return b.String()
+		// Truncate long segments at a word boundary if possible
+		result := b.String()
+		if len(result) > maxSegment {
+			result = result[:maxSegment]
+			// Trim trailing hyphen from a split word
+			result = strings.TrimRight(result, "-")
+		}
+		return result
 	}
+
 	ext := filepath.Ext(orig)
 	stem := strings.TrimSuffix(filepath.Base(orig), ext)
 	parts := []string{}
@@ -198,11 +213,44 @@ func SuggestFilename(e *Entry, orig string) string {
 	if e.Location != "" {
 		parts = append(parts, sanitize(e.Location))
 	}
-	parts = append(parts, stem)
+	// Only add stem if we have room and it adds something unique
+	shortStem := stem
+	if len(shortStem) > 12 {
+		shortStem = shortStem[:12]
+		shortStem = strings.TrimRight(shortStem, "-_")
+	}
+	parts = append(parts, shortStem)
 	if len(parts) > 4 {
 		parts = parts[:4]
 	}
-	return strings.Join(parts, "_") + ext
+
+	// Join and cap total length so the overall filename is usable
+	name := strings.Join(parts, "_")
+	if len(name) > maxTotal {
+		// Shrink from the middle — keep first part (game) and last part (stem),
+		// truncate the middle parts proportionally.
+		name = parts[0] + "_"
+		remaining := maxTotal - len(name) - len(parts[len(parts)-1]) - 1 // 1 for "_"
+		if remaining < 4 {
+			// Nothing fits between — use just game-stem
+			name = parts[0] + "_" + parts[len(parts)-1]
+		} else {
+			mid := []string{}
+			for _, p := range parts[1 : len(parts)-1] {
+				if len(p) > remaining/2 {
+					p = p[:remaining/2]
+					p = strings.TrimRight(p, "-")
+				}
+				mid = append(mid, p)
+			}
+			name = parts[0] + "_" + strings.Join(mid, "_") + "_" + parts[len(parts)-1]
+		}
+		if len(name) > maxTotal {
+			name = name[:maxTotal]
+			name = strings.TrimRight(name, "-_")
+		}
+	}
+	return name + ext
 }
 
 // SanitizeFolderName strips Windows-reserved chars from a name.
