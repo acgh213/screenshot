@@ -1,0 +1,1314 @@
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER] Success! HTTP server listening on port 1234
+[2026-05-24 08:21:31][WARN][LM STUDIO SERVER] Server accepting connections from the local network. Only use this if you know what you are doing!
+[2026-05-24 08:21:31][INFO] 
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER] Supported endpoints:
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER]   LM Studio API
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER]    ->  GET  http://169.254.83.107:1234/api/v1/models
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/api/v1/chat
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/api/v1/models/load
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/api/v1/models/download
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER]    ->  GET http://169.254.83.107:1234/api/v1/models/download/status:job_id
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER]   OpenAI-compatible
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER]    ->  GET  http://169.254.83.107:1234/v1/models
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/v1/responses
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/v1/chat/completions
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/v1/completions
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/v1/embeddings
+[2026-05-24 08:21:31][INFO] 
+[2026-05-24 08:21:31][INFO][LM STUDIO SERVER] Logs are saved into C:\Users\Cassie\.lmstudio\server-logs
+[2026-05-24 08:21:31][INFO] Server started.
+[2026-05-24 08:21:31][INFO] Just-in-time model loading active.
+[2026-05-24 09:15:10][INFO] Server stopped.
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER] Success! HTTP server listening on port 1234
+[2026-05-24 09:15:40][WARN][LM STUDIO SERVER] Server accepting connections from the local network. Only use this if you know what you are doing!
+[2026-05-24 09:15:40][INFO] 
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER] Supported endpoints:
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER]   LM Studio API
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER]    ->  GET  http://169.254.83.107:1234/api/v1/models
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/api/v1/chat
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/api/v1/models/load
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/api/v1/models/download
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER]    ->  GET http://169.254.83.107:1234/api/v1/models/download/status:job_id
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER]   OpenAI-compatible
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER]    ->  GET  http://169.254.83.107:1234/v1/models
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/v1/responses
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/v1/chat/completions
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/v1/completions
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER]    ->  POST http://169.254.83.107:1234/v1/embeddings
+[2026-05-24 09:15:40][INFO] 
+[2026-05-24 09:15:40][INFO][LM STUDIO SERVER] Logs are saved into C:\Users\Cassie\.lmstudio\server-logs
+[2026-05-24 09:15:40][INFO] Server started.
+[2026-05-24 09:15:40][INFO] Just-in-time model loading active.
+[2026-05-24 09:17:33][INFO] Returning {
+  "data": [
+    {
+      "id": "google/gemma-4-e4b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "cass/gemma-4-e4b-it@q4_k_m",
+      "object": "model",
+      "type": "llm",
+      "publisher": "cass",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "gemma-4-e4b-cass@bf16",
+      "object": "model",
+      "type": "llm",
+      "publisher": "cass",
+      "arch": "clip",
+      "compatibility_type": "gguf",
+      "quantization": "BF16",
+      "state": "not-loaded"
+    },
+    {
+      "id": "gemma-4-e4b-cass@q4_k_m",
+      "object": "model",
+      "type": "llm",
+      "publisher": "cass",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "google/gemma-4-31b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "google/gemma-4-26b-a4b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "qwen/qwen3.5-9b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "qwen",
+      "arch": "qwen35",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "nvidia/nemotron-3-nano-4b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "nvidia",
+      "arch": "nemotron_h",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 1048576,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "text-embedding-nomic-embed-text-v1.5",
+      "object": "model",
+      "type": "embeddings",
+      "publisher": "nomic-ai",
+      "arch": "nomic-bert",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 2048
+    },
+    {
+      "id": "pygmalion-2-13b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "TheBloke",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_S",
+      "state": "not-loaded",
+      "max_context_length": 4096
+    },
+    {
+      "id": "mythomax-l2-13b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "TheBloke",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_S",
+      "state": "not-loaded",
+      "max_context_length": 4096
+    },
+    {
+      "id": "llama-2-7b-chat",
+      "object": "model",
+      "type": "llm",
+      "publisher": "TheBloke",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_S",
+      "state": "not-loaded",
+      "max_context_length": 4096
+    },
+    {
+      "id": "llama-3.1-8b-lexi-uncensored-v2",
+      "object": "model",
+      "type": "llm",
+      "publisher": "Orenguteng",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "dolphin-2.2.1-mistral-7b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "TheBloke",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_S",
+      "state": "not-loaded",
+      "max_context_length": 32768
+    },
+    {
+      "id": "qwen/qwen3-4b-2507",
+      "object": "model",
+      "type": "llm",
+      "publisher": "qwen",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "qwen/qwen3-4b-thinking-2507",
+      "object": "model",
+      "type": "llm",
+      "publisher": "qwen",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "openai",
+      "arch": "gpt-oss",
+      "compatibility_type": "gguf",
+      "quantization": "MXFP4",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "google/gemma-3-12b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072
+    },
+    {
+      "id": "qwen/qwen3-8b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "qwen",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 32768,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "microsoft/phi-4-mini-reasoning",
+      "object": "model",
+      "type": "llm",
+      "publisher": "microsoft",
+      "arch": "phi3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072
+    },
+    {
+      "id": "google/gemma-3n-e4b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "google",
+      "arch": "gemma3n",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 32768
+    },
+    {
+      "id": "deepseek/deepseek-r1-0528-qwen3-8b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "deepseek",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072
+    },
+    {
+      "id": "qwen/qwen3-4b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "qwen",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 32768,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "google/gemma-3-4b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072
+    }
+  ],
+  "object": "list"
+}
+[2026-05-24 09:17:33][INFO] Returning {
+  "data": [
+    {
+      "id": "google/gemma-4-e4b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "cass/gemma-4-e4b-it@q4_k_m",
+      "object": "model",
+      "type": "llm",
+      "publisher": "cass",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "gemma-4-e4b-cass@bf16",
+      "object": "model",
+      "type": "llm",
+      "publisher": "cass",
+      "arch": "clip",
+      "compatibility_type": "gguf",
+      "quantization": "BF16",
+      "state": "not-loaded"
+    },
+    {
+      "id": "gemma-4-e4b-cass@q4_k_m",
+      "object": "model",
+      "type": "llm",
+      "publisher": "cass",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "google/gemma-4-31b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "google/gemma-4-26b-a4b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "qwen/qwen3.5-9b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "qwen",
+      "arch": "qwen35",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "nvidia/nemotron-3-nano-4b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "nvidia",
+      "arch": "nemotron_h",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 1048576,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "text-embedding-nomic-embed-text-v1.5",
+      "object": "model",
+      "type": "embeddings",
+      "publisher": "nomic-ai",
+      "arch": "nomic-bert",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 2048
+    },
+    {
+      "id": "pygmalion-2-13b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "TheBloke",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_S",
+      "state": "not-loaded",
+      "max_context_length": 4096
+    },
+    {
+      "id": "mythomax-l2-13b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "TheBloke",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_S",
+      "state": "not-loaded",
+      "max_context_length": 4096
+    },
+    {
+      "id": "llama-2-7b-chat",
+      "object": "model",
+      "type": "llm",
+      "publisher": "TheBloke",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_S",
+      "state": "not-loaded",
+      "max_context_length": 4096
+    },
+    {
+      "id": "llama-3.1-8b-lexi-uncensored-v2",
+      "object": "model",
+      "type": "llm",
+      "publisher": "Orenguteng",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "dolphin-2.2.1-mistral-7b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "TheBloke",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_S",
+      "state": "not-loaded",
+      "max_context_length": 32768
+    },
+    {
+      "id": "qwen/qwen3-4b-2507",
+      "object": "model",
+      "type": "llm",
+      "publisher": "qwen",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "qwen/qwen3-4b-thinking-2507",
+      "object": "model",
+      "type": "llm",
+      "publisher": "qwen",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "openai",
+      "arch": "gpt-oss",
+      "compatibility_type": "gguf",
+      "quantization": "MXFP4",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "google/gemma-3-12b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072
+    },
+    {
+      "id": "qwen/qwen3-8b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "qwen",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 32768,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "microsoft/phi-4-mini-reasoning",
+      "object": "model",
+      "type": "llm",
+      "publisher": "microsoft",
+      "arch": "phi3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072
+    },
+    {
+      "id": "google/gemma-3n-e4b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "google",
+      "arch": "gemma3n",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 32768
+    },
+    {
+      "id": "deepseek/deepseek-r1-0528-qwen3-8b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "deepseek",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072
+    },
+    {
+      "id": "qwen/qwen3-4b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "qwen",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 32768,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "google/gemma-3-4b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072
+    }
+  ],
+  "object": "list"
+}
+[2026-05-24 09:18:29][INFO] Returning {
+  "data": [
+    {
+      "id": "google/gemma-4-e4b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "loaded",
+      "max_context_length": 131072,
+      "loaded_context_length": 4096,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "cass/gemma-4-e4b-it@q4_k_m",
+      "object": "model",
+      "type": "llm",
+      "publisher": "cass",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "gemma-4-e4b-cass@bf16",
+      "object": "model",
+      "type": "llm",
+      "publisher": "cass",
+      "arch": "clip",
+      "compatibility_type": "gguf",
+      "quantization": "BF16",
+      "state": "not-loaded"
+    },
+    {
+      "id": "gemma-4-e4b-cass@q4_k_m",
+      "object": "model",
+      "type": "llm",
+      "publisher": "cass",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "google/gemma-4-31b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "google/gemma-4-26b-a4b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma4",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "qwen/qwen3.5-9b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "qwen",
+      "arch": "qwen35",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "nvidia/nemotron-3-nano-4b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "nvidia",
+      "arch": "nemotron_h",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 1048576,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "text-embedding-nomic-embed-text-v1.5",
+      "object": "model",
+      "type": "embeddings",
+      "publisher": "nomic-ai",
+      "arch": "nomic-bert",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 2048
+    },
+    {
+      "id": "pygmalion-2-13b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "TheBloke",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_S",
+      "state": "not-loaded",
+      "max_context_length": 4096
+    },
+    {
+      "id": "mythomax-l2-13b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "TheBloke",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_S",
+      "state": "not-loaded",
+      "max_context_length": 4096
+    },
+    {
+      "id": "llama-2-7b-chat",
+      "object": "model",
+      "type": "llm",
+      "publisher": "TheBloke",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_S",
+      "state": "not-loaded",
+      "max_context_length": 4096
+    },
+    {
+      "id": "llama-3.1-8b-lexi-uncensored-v2",
+      "object": "model",
+      "type": "llm",
+      "publisher": "Orenguteng",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "dolphin-2.2.1-mistral-7b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "TheBloke",
+      "arch": "llama",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_S",
+      "state": "not-loaded",
+      "max_context_length": 32768
+    },
+    {
+      "id": "qwen/qwen3-4b-2507",
+      "object": "model",
+      "type": "llm",
+      "publisher": "qwen",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "qwen/qwen3-4b-thinking-2507",
+      "object": "model",
+      "type": "llm",
+      "publisher": "qwen",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 262144,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "openai",
+      "arch": "gpt-oss",
+      "compatibility_type": "gguf",
+      "quantization": "MXFP4",
+      "state": "not-loaded",
+      "max_context_length": 131072,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "google/gemma-3-12b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072
+    },
+    {
+      "id": "qwen/qwen3-8b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "qwen",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 32768,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "microsoft/phi-4-mini-reasoning",
+      "object": "model",
+      "type": "llm",
+      "publisher": "microsoft",
+      "arch": "phi3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072
+    },
+    {
+      "id": "google/gemma-3n-e4b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "google",
+      "arch": "gemma3n",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 32768
+    },
+    {
+      "id": "deepseek/deepseek-r1-0528-qwen3-8b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "deepseek",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072
+    },
+    {
+      "id": "qwen/qwen3-4b",
+      "object": "model",
+      "type": "llm",
+      "publisher": "qwen",
+      "arch": "qwen3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 32768,
+      "capabilities": [
+        "tool_use"
+      ]
+    },
+    {
+      "id": "google/gemma-3-4b",
+      "object": "model",
+      "type": "vlm",
+      "publisher": "google",
+      "arch": "gemma3",
+      "compatibility_type": "gguf",
+      "quantization": "Q4_K_M",
+      "state": "not-loaded",
+      "max_context_length": 131072
+    }
+  ],
+  "object": "list"
+}
+[2026-05-24 09:22:30][INFO][google/gemma-4-e4b] Running chat completion on conversation with 1 messages.
+[2026-05-24 09:22:31][INFO][google/gemma-4-e4b] Prompt processing progress: 0.0%
+[2026-05-24 09:22:31][INFO][google/gemma-4-e4b] Prompt processing progress: 37.1%
+[2026-05-24 09:22:32][INFO][google/gemma-4-e4b] Prompt processing progress: 99.0%
+[2026-05-24 09:22:32][INFO][google/gemma-4-e4b] Prompt processing progress: 100.0%
+[2026-05-24 09:22:32][INFO][google/gemma-4-e4b] Start thinking...
+[2026-05-24 09:22:37][INFO][google/gemma-4-e4b] Model generated tool calls: []
+[2026-05-24 09:22:37][INFO][google/gemma-4-e4b] Generated prediction: {
+  "id": "chatcmpl-fyf3arsoxv4ynkhunqubpa",
+  "object": "chat.completion",
+  "created": 1779628950,
+  "model": "google/gemma-4-e4b",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "reasoning_content": "\nHere's a thinking process to analyze the screenshot and generate the required JSON:\n\n1.  **Analyze the Image Content:**\n    *   **Overall Scene:** It's a first-person perspective (FPS) view, suggesting action or exploration. The environment is highly technological, dark, and urban/industrial.\n    *   **Game Title/Branding:** \"Cyberpunk 2077\" is clearly visible at the bottom left.\n    *   **Action/Focus:** The player is holding a futuristic weapon (a gun/rifle). There are UI elements related to combat and objectives.\n    *   **Characters:** While no characters are prominently featured in action, there are silhouettes or figures visible in the background through the doorway/hallway. One character name (\"TAKEMURA\") is visible on the HUD.\n    *   **Location:** An interior setting, likely a corporate building, apartment complex, or street corner within Night City (the setting of Cyberpunk 2077). The aesthetic is high-tech decay/cyberpunk.\n    *   **UI Elements:**\n        *   HUD (Heads-Up Display): Contains health bars, objective markers, and status information.\n        *   Minimap: Visible in the top right corner, showing a map layout.\n        *   Objective Marker/Dialogue Prompt: \"GIMME DANGER / Hack the float.\" This indicates an active mission or interaction point.\n        *   Weapon Model: The weapon itself is part of the UI/gameplay view.\n\n2.  **Determine JSON Fields:**\n\n    *   **`game`**: Cyberpunk 2077 (Obvious).\n    *   **`scene`**: Combat preparation / Active mission objective (The player is geared up and facing a specific task).\n    *   **`characters`**: None clearly visible in focus, but \"Takemura\" is mentioned on the HUD. It's safer to list characters *visible* or *mentioned*. Let's stick with names seen: [\"Takemura\"].\n    *   **`location`**: Night City (General setting). More specifically, an interior urban environment/building.\n    *   **`ui_elements`**: Comprehensive list: [\"HUD\", \"Minimap\", \"Health Bar\", \"Objective Marker\", \"Weapon Model\", \"Dialogue Prompt\"].\n    *   **`mood",
+        "tool_calls": []
+      },
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 410,
+    "completion_tokens": 500,
+    "total_tokens": 910,
+    "completion_tokens_details": {
+      "reasoning_tokens": 497
+    }
+  },
+  "stats": {},
+  "system_fingerprint": "google/gemma-4-e4b"
+}
+[2026-05-24 09:22:38][INFO][google/gemma-4-e4b] Running chat completion on conversation with 1 messages.
+[2026-05-24 09:22:38][INFO][google/gemma-4-e4b] Prompt processing progress: 0.0%
+[2026-05-24 09:22:38][INFO][google/gemma-4-e4b] Prompt processing progress: 98.5%
+[2026-05-24 09:22:38][INFO][google/gemma-4-e4b] Prompt processing progress: 100.0%
+[2026-05-24 09:22:38][INFO][google/gemma-4-e4b] Start thinking...
+[2026-05-24 09:22:43][INFO][google/gemma-4-e4b] Model generated tool calls: []
+[2026-05-24 09:22:43][INFO][google/gemma-4-e4b] Generated prediction: {
+  "id": "chatcmpl-4c1utpe6zgl5f0200ixo5e",
+  "object": "chat.completion",
+  "created": 1779628958,
+  "model": "google/gemma-4-e4b",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "reasoning_content": "\nHere's a thinking process to analyze the screenshot and generate the required JSON:\n\n1.  **Analyze the Image Content:**\n    *   **Overall Look/Aesthetics:** Sci-fi, futuristic, digital interface, glowing blue/red accents, dark background.\n    *   **Main Focus Area (The Screen):** A large screen displaying text in binary code and structured information.\n    *   **Text/Data:**\n        *   Top right corner: \"I WALK THE LINE\", \"Leave the Grand Imperial Mall.\" (Suggests a location or objective).\n        *   Left side: \"messages\" (A communication log/system).\n        *   Center screen content: Binary code blocks, labeled sections like \"eini i ii ino_data\", \"Relic - offer\", \"mwazel leve pou dan\".\n        *   Bottom section: Controls or status indicators.\n    *   **UI Elements:** Highly visible HUD elements (the entire interface), text boxes, data displays, directional arrows/pointers.\n\n2.  **Determine the JSON Fields:**\n\n    *   **`game`**: What kind of game is this? Sci-fi RPG, cyberpunk, or mystery/investigation game with heavy UI focus. *Self-Correction: Since no specific branding is visible, I'll keep it general but genre-specific.*\n    *   **`scene`**: What is happening? The player is viewing data, likely receiving a message or analyzing an object/location via a terminal interface. -> Data analysis / System interaction.\n    *   **`characters`**: Are any characters visible? No actual character models are visible, only text references (if they were part of the dialogue). -> None visible.\n    *   **`location`**: Where is this happening? Inside a futuristic structure, possibly a terminal or data hub within a large complex (like \"Grand Imperial Mall\").\n    *   **`ui_elements`**: What components are present? HUD, Terminal Display, Data Logs, Binary Code Viewer, Messages Log.\n    *   **`mood`**: How does it feel? Technical, mysterious, investigative, futuristic. -> Tense, Mysterious, Sci-Fi.\n    *   **`keywords`**: Search terms for this type of image/game. -> Cyberpunk, Sci-Fi, Terminal, Binary Code, HUD, Data Log.\n",
+        "tool_calls": []
+      },
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 422,
+    "completion_tokens": 500,
+    "total_tokens": 922,
+    "completion_tokens_details": {
+      "reasoning_tokens": 497
+    }
+  },
+  "stats": {},
+  "system_fingerprint": "google/gemma-4-e4b"
+}
+[2026-05-24 09:22:44][INFO][google/gemma-4-e4b] Running chat completion on conversation with 1 messages.
+[2026-05-24 09:22:44][INFO][google/gemma-4-e4b] Prompt processing progress: 0.0%
+[2026-05-24 09:22:44][INFO][google/gemma-4-e4b] Prompt processing progress: 98.5%
+[2026-05-24 09:22:44][INFO][google/gemma-4-e4b] Prompt processing progress: 100.0%
+[2026-05-24 09:22:44][INFO][google/gemma-4-e4b] Start thinking...
+[2026-05-24 09:22:49][INFO][google/gemma-4-e4b] Model generated tool calls: []
+[2026-05-24 09:22:49][INFO][google/gemma-4-e4b] Generated prediction: {
+  "id": "chatcmpl-8l8bidwzo0ftk5qwxz3rtn",
+  "object": "chat.completion",
+  "created": 1779628964,
+  "model": "google/gemma-4-e4b",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "reasoning_content": "\nHere's a thinking process to analyze the screenshot and generate the required JSON:\n\n1.  **Analyze the Image Content:**\n    *   **Visuals:** The image is dark, somewhat grainy, and appears to be from a video game (indicated by the UI elements). There is a vehicle visible in the foreground/middle ground.\n    *   **Text Overlays (Crucial):**\n        *   \"FOLLOWING THE RIVER\" (Large text)\n        *   \"⚠️ Follow River.\" (Warning icon and instruction)\n        *   Top right corner: \"CONNECTION DATABASE D6-45A.S\" (Technical/Sci-Fi jargon)\n    *   **UI Elements:**\n        *   The large directional text (\"FOLLOWING THE RIVER\").\n        *   The warning symbol/icon (⚠️).\n        *   A circular UI element on the right side (likely a map or interaction button).\n        *   Other faint HUD elements are present.\n\n2.  **Determine JSON Fields:** I need to fill out all keys: `game`, `scene`, `characters`, `location`, `ui_elements`, `mood`, `keywords`, `suggested_filename`.\n\n3.  **Populate Fields (Drafting Content):**\n    *   **`game`**: The style (dark, sci-fi/post-apocalyptic, vehicle focus) suggests a survival or action RPG. Since no specific logo is visible, I must generalize. *Suggestion: Unknown Sci-Fi Action Game.*\n    *   **`scene`**: The player is being directed by the game system. This is movement/exploration. *Suggestion: Exploration / Directional Guidance.*\n    *   **`characters`**: No characters are explicitly visible or named, only a person referred to as \"River\" (who might be the objective). *Suggestion: None visible (Objective: River).*\n    *   **`location`**: The text mentions \"river,\" and the setting is dark/urban/industrial. *Suggestion: Near a river / Urban environment.*\n    *   **`ui_elements`**: List everything seen. *Suggestion: HUD, directional prompt, warning icon, minimap/system interface (Connection Database).*\n    *   **`mood`**: The darkness and the urgent warning suggest tension. *Suggestion: Tense, mysterious, suspenseful.*\n    ",
+        "tool_calls": []
+      },
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 422,
+    "completion_tokens": 500,
+    "total_tokens": 922,
+    "completion_tokens_details": {
+      "reasoning_tokens": 497
+    }
+  },
+  "stats": {},
+  "system_fingerprint": "google/gemma-4-e4b"
+}
+[2026-05-24 09:22:49][INFO][google/gemma-4-e4b] Running chat completion on conversation with 1 messages.
+[2026-05-24 09:22:49][INFO][google/gemma-4-e4b] Prompt processing progress: 0.0%
+[2026-05-24 09:22:50][INFO][google/gemma-4-e4b] Prompt processing progress: 98.5%
+[2026-05-24 09:22:50][INFO][google/gemma-4-e4b] Prompt processing progress: 100.0%
+[2026-05-24 09:22:50][INFO][google/gemma-4-e4b] Start thinking...
+[2026-05-24 09:22:55][INFO][google/gemma-4-e4b] Model generated tool calls: []
+[2026-05-24 09:22:55][INFO][google/gemma-4-e4b] Generated prediction: {
+  "id": "chatcmpl-njox5hf693b21b21umbmmuj",
+  "object": "chat.completion",
+  "created": 1779628969,
+  "model": "google/gemma-4-e4b",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "reasoning_content": "\nHere's a thinking process to analyze the screenshot and generate the required JSON:\n\n1.  **Analyze the Image Content:**\n    *   The image is clearly a screen from a video game, specifically related to weapon customization or viewing stats.\n    *   There are large numbers (1250), names (\"ADORED\", \"Sniper Rifle\"), and various technical attributes (Impact, Range, Stability, etc.).\n    *   The layout is structured with headings, bars, and selectable options.\n\n2.  **Determine the JSON Fields:** I need to fill out: `game`, `scene`, `characters`, `location`, `ui_elements`, `mood`, `keywords`, `suggested_filename`.\n\n3.  **Populate the Fields (Drafting):**\n\n    *   **`game`**: The style (sci-fi/military, detailed stats) suggests a modern shooter or RPG with deep gear customization. I cannot name the exact game, so I must generalize based on genre. *Suggestion: Shooter / Sci-Fi RPG.*\n    *   **`scene`**: This is not action; it's viewing information. *Suggestion: Equipment/Weapon Stats Screen (Menu).*\n    *   **`characters`**: No characters are visible, only the weapon itself. *Suggestion: [] (Empty array).*\n    *   **`location`**: The game world location is irrelevant; this is a menu overlay. *Suggestion: Inventory / Armory Menu.*\n    *   **`ui_elements`**: This is critical. I see stats bars, names, numbers, and selectable options. *Suggestion: Stats Display, Weapon Name/Type, Currency/Cost Indicator (1250), Upgrade Options, Skill/Module Slots.*\n    *   **`mood`**: The presentation is technical and focused on power/optimization. *Suggestion: Technical, Focused, Powerful.*\n    *   **`keywords`**: What terms describe the content? *Suggestion: Sniper Rifle, Stats, Customization, Legendary, Upgrade, Arsenal, Gear.*\n    *   **`suggested_filename`**: Needs to be descriptive and clean. *Suggestion: weapon-stats-screen-adored-sniper-rifle.*\n\n4.  **Review and Refine (JSON Structure Check):** Ensure the output is *only* valid JSON and adheres strictly to the required",
+        "tool_calls": []
+      },
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 424,
+    "completion_tokens": 500,
+    "total_tokens": 924,
+    "completion_tokens_details": {
+      "reasoning_tokens": 497
+    }
+  },
+  "stats": {},
+  "system_fingerprint": "google/gemma-4-e4b"
+}
+[2026-05-24 09:22:55][INFO][google/gemma-4-e4b] Running chat completion on conversation with 1 messages.
+[2026-05-24 09:22:55][INFO][google/gemma-4-e4b] Prompt processing progress: 0.0%
+[2026-05-24 09:22:55][INFO][google/gemma-4-e4b] Prompt processing progress: 98.5%
+[2026-05-24 09:22:55][INFO][google/gemma-4-e4b] Prompt processing progress: 100.0%
+[2026-05-24 09:22:55][INFO][google/gemma-4-e4b] Start thinking...
+[2026-05-24 09:23:01][INFO][google/gemma-4-e4b] Model generated tool calls: []
+[2026-05-24 09:23:01][INFO][google/gemma-4-e4b] Generated prediction: {
+  "id": "chatcmpl-ngsh9mpcw9bq37d2plwvml",
+  "object": "chat.completion",
+  "created": 1779628975,
+  "model": "google/gemma-4-e4b",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "reasoning_content": "\nHere's a thinking process to analyze the screenshot and generate the required JSON:\n\n1.  **Analyze the Image Content:**\n    *   **Visual Style/Aesthetics:** Sci-fi, post-apocalyptic, industrial, large structures (red monoliths). The lighting is dramatic, suggesting conflict or high stakes.\n    *   **Action/Scene:** A character is standing in a massive, ruined architectural space. There are combat elements visible (HUD, health bars, weapon models, damage numbers). This is clearly an active gameplay moment.\n    *   **Characters:** One main player-controlled character is visible in the center. Other characters might be implied by enemy presence or objectives, but only one primary figure is clearly seen.\n    *   **Location:** A massive, stylized, red sci-fi structure/cityscape. Looks like a major hub or battleground within a futuristic setting.\n    *   **UI Elements (Crucial for analysis):**\n        *   Top right: Player name (\"ERIS MORN\"), health bar, resource indicators.\n        *   Bottom left: Objective text (\"Rewind Again x2\", \"Anti-Barrier Rounds\").\n        *   Center/Right: Weapon model (appears to be a large gun), ammo count, damage numbers (+2, +5).\n        *   Bottom center: Dialogue box/Objective tracker (\"The Hive must have grander ambitions for the Pyramid's influences.\").\n        *   Bottom right: Time stamp (16:54), coordinates (0.6x, 88677).\n    *   **Mood:** Tense, action-packed, dramatic, sci-fi conflict.\n\n2.  **Determine JSON Fields:**\n\n    *   **game:** Needs a guess based on the aesthetic and UI. It's high-production sci-fi shooter/RPG. (Guess: Sci-Fi Shooter / Action RPG).\n    *   **scene:** Combat/Gameplay.\n    *   **characters:** The player character is visible.\n    *   **location:** Futuristic, massive red structures.\n    *   **ui_elements:** Comprehensive list based on observation (HUD, minimap implied by the scope of view, health bar, objective markers, dialogue).\n    *   **mood:** Tense, dramatic.\n    *   **keywords:** Sci-fi, combat, monolith",
+        "tool_calls": []
+      },
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 422,
+    "completion_tokens": 500,
+    "total_tokens": 922,
+    "completion_tokens_details": {
+      "reasoning_tokens": 497
+    }
+  },
+  "stats": {},
+  "system_fingerprint": "google/gemma-4-e4b"
+}
+[2026-05-24 09:23:01][INFO][google/gemma-4-e4b] Running chat completion on conversation with 1 messages.
+[2026-05-24 09:23:01][INFO][google/gemma-4-e4b] Prompt processing progress: 0.0%
+[2026-05-24 09:23:01][INFO][google/gemma-4-e4b] Prompt processing progress: 98.5%
+[2026-05-24 09:23:01][INFO][google/gemma-4-e4b] Prompt processing progress: 100.0%
+[2026-05-24 09:23:01][INFO][google/gemma-4-e4b] Start thinking...
+[2026-05-24 09:23:06][INFO][google/gemma-4-e4b] Model generated tool calls: []
+[2026-05-24 09:23:06][INFO][google/gemma-4-e4b] Generated prediction: {
+  "id": "chatcmpl-lgvkuc6wxgs3r9pz33pjmu",
+  "object": "chat.completion",
+  "created": 1779628981,
+  "model": "google/gemma-4-e4b",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "reasoning_content": "\nHere's a thinking process to analyze the screenshot and generate the required JSON:\n\n1.  **Analyze the Image Content:**\n    *   **Visual Focus (Right Side):** A detailed, futuristic weapon is displayed. It has blue/purple glowing elements and appears high-tech. This suggests an item inspection or reveal scene.\n    *   **Textual Content (Left Side - Dialogue Box):** There is a character name (\"Graviton Lance\") and extensive dialogue. The conversation revolves around the weapon (\"WEAPON IS THE NEEDLE,\" \"It fires black holes,\" etc.).\n    *   **Overall Layout:** It's split between narrative text/dialogue and a detailed visual asset display.\n\n2.  **Determine JSON Fields Values:**\n\n    *   **`game`**: The dialogue mentions specific sci-fi elements (Graviton Lance, \"black holes,\" futuristic weapons). While the game name isn't explicitly visible, the style is highly reminiscent of modern action RPGs or shooters with deep lore. *Self-Correction/Assumption:* Since no logo or title card is present, I must describe the genre/style rather than naming a specific game unless it's universally recognizable (which it isn't here). Let's use \"Sci-Fi Action RPG\" or similar.\n    *   **`scene`**: The characters are discussing an item and viewing it in detail. This is clearly a narrative interaction, likely an item inspection or lore reveal during dialogue. -> *Dialogue/Item Inspection.*\n    *   **`characters`**: Only one name is prominently displayed as the speaker's title: \"Graviton Lance.\" However, since there is dialogue exchange (implied back-and-forth), multiple characters are involved, even if only one is named in the visible text block. I will list the visible name and note the interaction. -> *[\"Graviton Lance\", \"Unnamed Character\"]*\n    *   **`location`**: The background is minimal/dark, focusing on the object. No specific environment (city, room, etc.) is shown. -> *Unknown / Dialogue Scene.*\n    *   **`ui_elements`**:\n        *   Dialogue box (text).\n        *   Character name display (\"Graviton Lance\").\n        *   The weapon itself (visual asset/display).\n        *   (No visible health bars, minimaps, etc",
+        "tool_calls": []
+      },
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 418,
+    "completion_tokens": 500,
+    "total_tokens": 918,
+    "completion_tokens_details": {
+      "reasoning_tokens": 497
+    }
+  },
+  "stats": {},
+  "system_fingerprint": "google/gemma-4-e4b"
+}
+[2026-05-24 09:23:07][INFO][google/gemma-4-e4b] Running chat completion on conversation with 1 messages.
+[2026-05-24 09:23:07][INFO][google/gemma-4-e4b] Prompt processing progress: 0.0%
+[2026-05-24 09:23:07][INFO][google/gemma-4-e4b] Prompt processing progress: 98.5%
+[2026-05-24 09:23:07][INFO][google/gemma-4-e4b] Prompt processing progress: 100.0%
+[2026-05-24 09:23:07][INFO][google/gemma-4-e4b] Start thinking...
+[2026-05-24 09:23:12][INFO][google/gemma-4-e4b] Model generated tool calls: []
+[2026-05-24 09:23:12][INFO][google/gemma-4-e4b] Generated prediction: {
+  "id": "chatcmpl-tmaui7pvkj440k4i0v9rv",
+  "object": "chat.completion",
+  "created": 1779628987,
+  "model": "google/gemma-4-e4b",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "reasoning_content": "\nHere's a thinking process to analyze the screenshot and generate the required JSON:\n\n1.  **Analyze the Image Content:**\n    *   **Overall Feel/Aesthetics:** Dark, sci-fi, high-tech, military/fantasy blend (sci-fi weaponry).\n    *   **Main Subject:** A detailed character model (male, armored) is displayed prominently on the left.\n    *   **Interface Elements (UI):** This is clearly an inventory/equipment screen or a gear inspection screen.\n        *   Left side: Character view, \"Gear Details\" section.\n        *   Center/Right side: Detailed stats and equipment information for an item (\"ADORED Sniper Rifle\").\n        *   Bottom left: A descriptive panel about the weapon's lore (\"BANSHEE-44\", \"GUNSMITH\").\n    *   **Text/Data Points:**\n        *   Item Name: ADORED (or similar, visible in the stats box).\n        *   Weapon Type: Sniper Rifle.\n        *   Stats: Impact, Range, Stability, Handling, Reload Speed, Magazine (all with numerical values and bars).\n        *   Cost/Price: 1250 (currency icon).\n        *   Lore Text: About \"Banshee-44\" and its history.\n        *   Dialogue Box (on the right): Contains dialogue (\"I forgot to check whom you sided with, Guardian,\" etc.). This suggests narrative context or character interaction related to the gear.\n\n2.  **Determine JSON Fields:**\n\n    *   **game:** What game is this? The aesthetic, terminology (Guardian, Gunsmith, Banshee-44), and UI strongly suggest a modern AAA sci-fi RPG, most likely *Destiny 2*.\n    *   **scene:** It's not combat or exploration. It's focused on viewing equipment details and lore. -> Gear Inspection/Loot Screen.\n    *   **characters:** The character model is visible, but no named characters are explicitly interacting in the scene (the dialogue might be from a vendor or NPC, but they aren't pictured). I will list \"Player Character\" (implied) and note the lore focus.\n    *   **location:** Not a physical location, but an in-game menu/hub area. -> Gearsmith Station / Inventory Menu.",
+        "tool_calls": []
+      },
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 422,
+    "completion_tokens": 500,
+    "total_tokens": 922,
+    "completion_tokens_details": {
+      "reasoning_tokens": 497
+    }
+  },
+  "stats": {},
+  "system_fingerprint": "google/gemma-4-e4b"
+}
+[2026-05-24 09:23:12][INFO][google/gemma-4-e4b] Running chat completion on conversation with 1 messages.
+[2026-05-24 09:23:13][INFO][google/gemma-4-e4b] Prompt processing progress: 0.0%
+[2026-05-24 09:23:13][INFO][google/gemma-4-e4b] Prompt processing progress: 98.5%
+[2026-05-24 09:23:13][INFO][google/gemma-4-e4b] Prompt processing progress: 100.0%
+[2026-05-24 09:23:13][INFO][google/gemma-4-e4b] Start thinking...
+[2026-05-24 09:23:18][INFO][google/gemma-4-e4b] Model generated tool calls: []
+[2026-05-24 09:23:18][INFO][google/gemma-4-e4b] Generated prediction: {
+  "id": "chatcmpl-gavm04ndsz0bbqn2h3rrsh",
+  "object": "chat.completion",
+  "created": 1779628992,
+  "model": "google/gemma-4-e4b",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "reasoning_content": "\nHere's a thinking process to arrive at the desired JSON output:\n\n1.  **Analyze the Image:** The image is not a typical in-game screenshot (showing characters, environments, or action). Instead, it is a highly rendered, isolated model of a futuristic weapon against a plain background. This suggests an asset showcase, a concept art render, or a loading screen/item view within a game's UI.\n\n2.  **Determine the JSON Fields:** I need to populate the following fields based on the image content:\n    *   `game`: (If identifiable)\n    *   `scene`: (What is happening?)\n    *   `characters`: (Are any visible?)\n    *   `location`: (Where is it?)\n    *   `ui_elements`: (Any UI components?)\n    *   `mood`: (The feeling evoked.)\n    *   `keywords`: (Search terms.)\n    *   `suggested_filename`: (Descriptive name.)\n\n3.  **Populate the Fields (Drafting Content):**\n\n    *   **`game`**: Cannot be determined from a single asset render. Best to keep it generic or describe the genre. *Decision: Sci-Fi Shooter/FPS.*\n    *   **`scene`**: It's an item showcase, not action. *Decision: Item Showcase / Asset Render.*\n    *   **`characters`**: None visible. *Decision: []*\n    *   **`location`**: Studio environment / Void background. *Decision: Digital/Studio Background.*\n    *   **`ui_elements`**: None are actively displayed, but the presentation suggests a game asset view. *Decision: [None]* (Or maybe \"Asset View Frame\"). I'll stick with `[None]` as nothing is visible.\n    *   **`mood`**: High-tech, powerful, futuristic. *Decision: Futuristic, Powerful, Sleek.*\n    *   **`keywords`**: Weapon, sci-fi, laser, gun, rifle, asset, render. *Decision: [\"sci-fi weapon\", \"laser rifle\", \"asset showcase\", \"futuristic firearm\"]*\n    *   **`suggested_filename`**: Needs to be descriptive. *Decision: futuristic-energy-rifle-showcase.*\n\n4.  **Review and Refine (",
+        "tool_calls": []
+      },
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 422,
+    "completion_tokens": 500,
+    "total_tokens": 922,
+    "completion_tokens_details": {
+      "reasoning_tokens": 497
+    }
+  },
+  "stats": {},
+  "system_fingerprint": "google/gemma-4-e4b"
+}
+[2026-05-24 09:23:18][INFO][google/gemma-4-e4b] Running chat completion on conversation with 1 messages.
+[2026-05-24 09:23:18][INFO][google/gemma-4-e4b] Prompt processing progress: 0.0%
+[2026-05-24 09:23:19][INFO][google/gemma-4-e4b] Prompt processing progress: 98.5%
+[2026-05-24 09:23:19][INFO][google/gemma-4-e4b] Prompt processing progress: 100.0%
+[2026-05-24 09:23:19][INFO][google/gemma-4-e4b] Start thinking...
+[2026-05-24 09:23:24][INFO][google/gemma-4-e4b] Model generated tool calls: []
+[2026-05-24 09:23:24][INFO][google/gemma-4-e4b] Generated prediction: {
+  "id": "chatcmpl-cbv9ufuhbudkezdglzw46",
+  "object": "chat.completion",
+  "created": 1779628998,
+  "model": "google/gemma-4-e4b",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "reasoning_content": "\nHere's a thinking process to analyze the screenshot and generate the required JSON:\n\n1.  **Analyze the Image Content:** The image is clearly not a video game screenshot in the traditional sense (like an RPG battle or platformer). It is a screenshot of a Discord chat interface.\n\n2.  **Determine the Fields for the JSON Structure:** I need to fill out the following keys based on the content:\n    *   `game`: What \"game\" is this? Since it's Discord, and the context suggests roleplay or community interaction (which often mimics game narratives), I must be careful. It's not a *video game*. I should identify the platform/context.\n    *   `scene`: What is happening? A conversation/roleplay chat.\n    *   `characters`: Who is visible? Users named \"acgh\" and \"Jearbear\".\n    *   `location`: Where is this taking place? Discord (specifically, a channel called \"#tendies\").\n    *   `ui_elements`: What elements are present? Standard Discord UI (sidebar, chat window, user names, timestamps, message input).\n    *   `mood`: What is the tone? Conversational, dramatic/roleplay-heavy (given the nature of the messages), perhaps slightly chaotic or humorous.\n    *   `keywords`: Key terms from the text (\"tendies,\" \"webull,\" \"millionaires,\" \"roleplay\").\n    *   `suggested_filename`: A descriptive title.\n\n3.  **Populate the Fields (Drafting Content):**\n\n    *   **`game`**: Discord chat/Roleplaying forum (Since it's not a game, I must describe the *medium*).\n    *   **`scene`**: Roleplay conversation/Chat interaction. The topic revolves around financial themes and dramatic character exchanges.\n    *   **`characters`**: acgh, Jearbear.\n    *   **`location`**: Discord chat (Channel #tendies).\n    *   **`ui_elements`**: Sidebar navigation, Chat input box, User avatars/names, Timestamps, Message history, Channel list.\n    *   **`mood`**: Conversational, dramatic, humorous (due to the nature of the roleplay).\n    *   **`keywords`**: Discord, Roleplay, Tendies,",
+        "tool_calls": []
+      },
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 422,
+    "completion_tokens": 500,
+    "total_tokens": 922,
+    "completion_tokens_details": {
+      "reasoning_tokens": 497
+    }
+  },
+  "stats": {},
+  "system_fingerprint": "google/gemma-4-e4b"
+}
+[2026-05-24 09:23:24][INFO][google/gemma-4-e4b] Running chat completion on conversation with 1 messages.
+[2026-05-24 09:23:24][INFO][google/gemma-4-e4b] Prompt processing progress: 0.0%
+[2026-05-24 09:23:24][INFO][google/gemma-4-e4b] Prompt processing progress: 98.6%
+[2026-05-24 09:23:24][INFO][google/gemma-4-e4b] Prompt processing progress: 100.0%
+[2026-05-24 09:23:24][INFO][google/gemma-4-e4b] Start thinking...
+[2026-05-24 09:23:29][INFO][google/gemma-4-e4b] Model generated tool calls: []
+[2026-05-24 09:23:29][INFO][google/gemma-4-e4b] Generated prediction: {
+  "id": "chatcmpl-7ij6uix67nmzaq9zovzq",
+  "object": "chat.completion",
+  "created": 1779629004,
+  "model": "google/gemma-4-e4b",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "reasoning_content": "\nHere's a thinking process to analyze the screenshot and generate the required JSON:\n\n1.  **Analyze the Image Content:**\n    *   The image is not from a video game; it appears to be a meme or a comic strip presented in a chat/forum format (indicated by usernames, timestamps, and dialogue boxes).\n    *   The content features two characters (a woman and a man) engaged in dialogue.\n\n2.  **Determine JSON Fields:** I must fill out the provided structure: `game`, `scene`, `characters`, `location`, `ui_elements`, `mood`, `keywords`, `suggested_filename`.\n\n3.  **Populate Fields (Self-Correction/Refinement):**\n\n    *   **`game`**: Since it's not a game, I must identify the *type* of media or leave it blank/generic. Given the format, \"Meme\" or \"Comic Strip\" is appropriate.\n    *   **`scene`**: What is happening? Dialogue exchange about money and selling things. -> Negotiation/Dialogue/Financial discussion (in a comedic context).\n    *   **`characters`**: The characters are generic representations but can be described based on the visuals. -> Woman, Man.\n    *   **`location`**: Where does this take place? Visually, it's presented in a chat window or forum interface. -> Digital Chat/Forum Interface (or simply \"N/A\" if strictly adhering to game world locations). I will use \"Digital Conversation.\"\n    *   **`ui_elements`**: What elements are visible? Usernames (`acgh`, `Jearbear`), timestamps, dialogue boxes, status indicators (\"NEW\"). -> Chat UI, Dialogue Boxes, Username Tags.\n    *   **`mood`**: The topic (making money) and the tone of the text suggest a mix of desperation and comedy. -> Comedic, Desperate, Financial.\n    *   **`keywords`**: Key concepts: Money, selling, millionaires, finance, meme. -> Meme, Finance, Millionaire, Dialogue, Comedy.\n    *   **`suggested_filename`**: Needs to be descriptive. -> babe-sell-so-we're-millionaires-meme\n\n4.  **Final JSON Construction:** (Assemble the gathered data into the required format.)\n\n5.  **",
+        "tool_calls": []
+      },
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 433,
+    "completion_tokens": 500,
+    "total_tokens": 933,
+    "completion_tokens_details": {
+      "reasoning_tokens": 497
+    }
+  },
+  "stats": {},
+  "system_fingerprint": "google/gemma-4-e4b"
+}

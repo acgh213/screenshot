@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\\\Users\\\\Cassie\\\\Desktop\\\\screenshot\")",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Cassie\\\\Desktop\\\\screenshot\" -File)",
+      "Bash(Select-Object Name)",
+      "Bash(git init *)"
+    ]
+  }
+}
