@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+logs/
+*.jsonl
+*.csv
+settings.json
+tui_new.exe
+tui_go/screenshot-cataloger.exe
+tui_go/..tui_new.exe
+*.exe
