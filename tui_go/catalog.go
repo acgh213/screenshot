@@ -14,19 +14,21 @@ import (
 
 // NdjsonMsg is one line from the Python subprocess stdout.
 type NdjsonMsg struct {
-	Type    string `json:"type"`
-	Total   int    `json:"total"`
-	File    string `json:"file"`
-	Name    string `json:"name"`
-	Game    string `json:"game"`
-	Scene   string `json:"scene"`
-	Status  string `json:"status"`
-	Error   string `json:"error"`
-	Msg     string `json:"msg"`
-	Success int    `json:"success"`
-	Fail    int    `json:"fail"`
-	Groups  int    `json:"groups"`
-	Files   []string `json:"files"`
+	Type     string   `json:"type"`
+	Total    int      `json:"total"`
+	File     string   `json:"file"`
+	Name     string   `json:"name"`
+	Game     string   `json:"game"`
+	Scene    string   `json:"scene"`
+	Status   string   `json:"status"`
+	Error    string   `json:"error"`
+	Msg      string   `json:"msg"`
+	Success  int      `json:"success"`
+	Fail     int      `json:"fail"`
+	Groups   int      `json:"groups"`
+	Files    []string `json:"files"`
+	Filtered int      `json:"filtered"`
+	Frames   int      `json:"frames"`
 }
 
 // CatalogProgressMsg carries a single NDJSON line from the subprocess.
@@ -216,14 +218,18 @@ func LaunchDupesProcess(ctx context.Context, manifest string, threshold int) (*b
 }
 
 // LaunchVideoProcess starts the Python video worker subprocess.
-func LaunchVideoProcess(ctx context.Context, videoFile, manifest, mode string, threshold, interval float64) (*bufio.Scanner, *exec.Cmd, error) {
+func LaunchVideoProcess(ctx context.Context, videoFile, manifest, mode string, threshold float64, s Settings) (*bufio.Scanner, *exec.Cmd, error) {
 	args := []string{
 		scriptPath(), "--stream-video",
 		"--file", videoFile,
 		"--manifest", manifest,
 		"--mode", mode,
 		"--threshold", fmt.Sprintf("%.2f", threshold),
-		"--interval", fmt.Sprintf("%.1f", interval),
+		"--interval-short", fmt.Sprintf("%.1f", s.VideoIntervalShort),
+		"--interval-med", fmt.Sprintf("%.1f", s.VideoIntervalMed),
+		"--interval-long", fmt.Sprintf("%.1f", s.VideoIntervalLong),
+		"--length-med-min", fmt.Sprintf("%d", s.VideoLengthMedMin),
+		"--length-long-min", fmt.Sprintf("%d", s.VideoLengthLongMin),
 	}
 	cmd := exec.CommandContext(ctx, pythonExe(), args...)
 	stdout, err := cmd.StdoutPipe()

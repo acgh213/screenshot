@@ -42,6 +42,16 @@ func DoOrganize(m Manifest, baseDir string, dryRun bool) ([][2]string, error) {
 	if !dryRun {
 		for _, mv := range moves {
 			src, dst := mv[0], mv[1]
+
+			// Identify companion transcript before moving
+			txSrc, txDst := "", ""
+			if e := m[src]; e != nil && e.TranscriptFile != "" {
+				if _, err := os.Stat(e.TranscriptFile); err == nil {
+					txSrc = e.TranscriptFile
+					txDst = filepath.Join(filepath.Dir(dst), filepath.Base(e.TranscriptFile))
+				}
+			}
+
 			if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
 				return moves, err
 			}
@@ -49,11 +59,20 @@ func DoOrganize(m Manifest, baseDir string, dryRun bool) ([][2]string, error) {
 				return moves, err
 			}
 			undoStack = append(undoStack, UndoEntry{Src: src, Dst: dst})
+
+			if txSrc != "" && txDst != "" {
+				if err := os.Rename(txSrc, txDst); err == nil {
+					undoStack = append(undoStack, UndoEntry{Src: txSrc, Dst: txDst})
+				}
+			}
 		}
 		for oldKey, newKey := range keysToUpdate {
 			e := m[oldKey]
 			delete(m, oldKey)
 			e.File = newKey
+			if e.TranscriptFile != "" {
+				e.TranscriptFile = filepath.Join(filepath.Dir(newKey), filepath.Base(e.TranscriptFile))
+			}
 			m[newKey] = e
 		}
 	}
@@ -85,15 +104,37 @@ func DoRename(m Manifest, dryRun bool) (int, [][2]string, error) {
 	if !dryRun {
 		for _, mv := range renames {
 			src, dst := mv[0], mv[1]
+
+			// Identify companion transcript before renaming
+			txSrc, txDst := "", ""
+			if e := m[src]; e != nil && e.TranscriptFile != "" {
+				if _, err := os.Stat(e.TranscriptFile); err == nil {
+					newStem := strings.TrimSuffix(filepath.Base(dst), filepath.Ext(dst))
+					txSrc = e.TranscriptFile
+					txDst = filepath.Join(filepath.Dir(dst), newStem+".txt")
+				}
+			}
+
 			if err := os.Rename(src, dst); err != nil {
 				return len(renames), renames, err
 			}
 			undoStack = append(undoStack, UndoEntry{Src: src, Dst: dst})
+
+			if txSrc != "" && txDst != "" {
+				if err := os.Rename(txSrc, txDst); err == nil {
+					undoStack = append(undoStack, UndoEntry{Src: txSrc, Dst: txDst})
+				}
+			}
 		}
 		for oldKey, newKey := range keysToUpdate {
 			e := m[oldKey]
 			delete(m, oldKey)
 			e.File = newKey
+			if e.TranscriptFile != "" {
+				oldStem := strings.TrimSuffix(filepath.Base(oldKey), filepath.Ext(oldKey))
+				newStem := strings.TrimSuffix(filepath.Base(newKey), filepath.Ext(newKey))
+				e.TranscriptFile = strings.ReplaceAll(e.TranscriptFile, oldStem+".txt", newStem+".txt")
+			}
 			m[newKey] = e
 		}
 	}

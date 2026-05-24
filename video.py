@@ -125,3 +125,33 @@ def extract_frames(
                 on_progress(f"⚠  scene detection failed ({e}), falling back to uniform")
 
     return extract_frames_uniform(video_path, output_dir, interval_sec, on_progress)
+
+
+def video_duration_sec(video_path: Path) -> float:
+    """Return video duration in seconds, or 0.0 if unreadable."""
+    cap = cv2.VideoCapture(str(video_path))
+    if not cap.isOpened():
+        return 0.0
+    fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
+    frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+    cap.release()
+    if fps <= 0 or frames <= 0:
+        return 0.0
+    return frames / fps
+
+
+def adaptive_interval_sec(
+    duration_sec: float,
+    short: float = 10.0,
+    med: float = 30.0,
+    long_iv: float = 60.0,
+    med_min: int = 5,
+    long_min: int = 30,
+) -> float:
+    """Return appropriate frame interval based on video duration."""
+    minutes = duration_sec / 60.0
+    if minutes < med_min:
+        return short
+    if minutes < long_min:
+        return med
+    return long_iv

@@ -12,16 +12,19 @@ import (
 
 // Entry is one record in the JSONL manifest.
 type Entry struct {
-	File        string   `json:"file"`
-	CatalogedAt string   `json:"cataloged_at"`
-	Game        string   `json:"game"`
-	Scene       string   `json:"scene"`
-	Location    string   `json:"location"`
-	Mood        string   `json:"mood"`
-	Keywords    []string `json:"keywords"`
-	SuggestedFn string   `json:"suggested_filename,omitempty"`
-	Error       string   `json:"error,omitempty"`
-	RawResponse string   `json:"raw_response,omitempty"`
+	File           string   `json:"file"`
+	CatalogedAt    string   `json:"cataloged_at"`
+	Game           string   `json:"game"`
+	Scene          string   `json:"scene"`
+	Location       string   `json:"location"`
+	Mood           string   `json:"mood"`
+	Keywords       []string `json:"keywords"`
+	SuggestedFn    string   `json:"suggested_filename,omitempty"`
+	Error          string   `json:"error,omitempty"`
+	RawResponse    string   `json:"raw_response,omitempty"`
+	IsVideo        bool     `json:"is_video,omitempty"`
+	FramesDir      string   `json:"frames_dir,omitempty"`
+	TranscriptFile string   `json:"transcript_file,omitempty"`
 }
 
 // IsFailed returns true if the entry represents a catalog failure.

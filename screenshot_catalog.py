@@ -26,6 +26,7 @@ import re
 import shutil
 import sys
 import time
+from collections import Counter
 from io import BytesIO
 from pathlib import Path
 
@@ -63,6 +64,32 @@ _NON_GAME_PREFIXES = (
     "obs64", "obs32", "streamlabs", "nvidia", "msi ", "afterburner",
     "nvdisplay", "nvcplui", "dwm", "explorer", "taskmgr",
 )
+
+# ── Scene filter for video transcripts ───────────────────
+_SKIP_SCENES = {
+    "loading", "loading screen", "load screen", "inventory",
+    "character screen", "pause", "pause menu", "main menu",
+    "settings", "settings menu", "map", "map screen", "transition",
+    "cutscene loading", "death screen", "respawn screen",
+}
+
+
+def _is_filtered_scene(scene: str) -> bool:
+    s = scene.lower()
+    return any(kw in s for kw in _SKIP_SCENES)
+
+
+def _frame_timestamp(frame_path: Path, fps: float) -> str:
+    """Derive timestamp string from frame filename (frame_000120 or frame_0042)."""
+    try:
+        frame_num = int(frame_path.stem.split("_")[-1])
+        total_sec = int(frame_num / fps) if fps > 0 else 0
+        h = total_sec // 3600
+        m = (total_sec % 3600) // 60
+        s = total_sec % 60
+        return f"{h:02d}:{m:02d}:{s:02d}" if h else f"{m:02d}:{s:02d}"
+    except (ValueError, IndexError):
+        return "00:00"
 
 # ── Undo stack ───────────────────────────────────────────
 # Each entry: ("move", src: Path, dst: Path)
@@ -439,21 +466,174 @@ def stream_dupes(manifest_path: Path, threshold: int) -> None:
     _emit({"type": "done", "groups": len(groups)})
 
 
-def stream_video(video_file: Path, manifest_path: Path, mode: str, threshold: float, interval: float) -> None:
-    """Extract frames then catalog them, streaming NDJSON."""
-    from video import extract_frames
+def stream_video(
+    video_file: Path,
+    manifest_path: Path,
+    mode: str,
+    threshold: float,
+    interval_short: float,
+    interval_med: float,
+    interval_long: float,
+    length_med_min: int,
+    length_long_min: int,
+) -> None:
+    """Extract frames, catalog them, write transcript, emit NDJSON."""
+    import cv2
+    from video import extract_frames, video_duration_sec, adaptive_interval_sec
 
     def _on_progress(msg: str) -> None:
         _emit({"type": "extract", "msg": msg})
 
+    # Adaptive interval based on video length
+    duration = video_duration_sec(video_file)
+    interval = adaptive_interval_sec(
+        duration, interval_short, interval_med, interval_long,
+        length_med_min, length_long_min,
+    )
+    mins = int(duration / 60)
+    dur_str = f"{mins}min" if duration > 0 else "unknown duration"
+    _emit({"type": "extract", "msg": f"adaptive interval: {interval:.0f}s ({dur_str})"})
+
     try:
-        frames = extract_frames(video_file, mode=mode, scene_threshold=threshold,
-                                interval_sec=interval, on_progress=_on_progress)
+        frames = extract_frames(
+            video_file, mode=mode, scene_threshold=threshold,
+            interval_sec=interval, on_progress=_on_progress,
+        )
     except Exception as e:
         _emit({"type": "error", "error": str(e)})
         return
 
-    stream_catalog(video_file.parent, manifest_path, all_files=False, explicit_files=[str(f) for f in frames])
+    if not frames:
+        _emit({"type": "done", "success": 0, "fail": 0})
+        return
+
+    frames_dir = frames[0].parent
+
+    # Catalog the frames — emits start / progress / done NDJSON
+    stream_catalog(
+        video_file.parent, manifest_path,
+        all_files=False, explicit_files=[str(f) for f in frames],
+    )
+
+    # Reload manifest to read the freshly-written frame entries
+    manifest = load_manifest(manifest_path)
+
+    # Get FPS for timestamps
+    cap = cv2.VideoCapture(str(video_file))
+    fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
+    cap.release()
+
+    # Separate gameplay frames from filtered (loading screens, menus, etc.)
+    all_entries: list[dict] = []
+    gameplay_frames: list[tuple] = []
+    filtered_count = 0
+
+    for frame in sorted(frames, key=lambda p: p.name):
+        rec = manifest.get(str(frame)) or manifest.get(str(frame.resolve()))
+        if rec is None:
+            continue
+        scene = rec.get("scene", "")
+        game = rec.get("game", "")
+        mood = (rec.get("mood") or "").split(",")[0].strip()
+        keywords = rec.get("keywords") or []
+        location = rec.get("location", "")
+        all_entries.append({"scene": scene, "game": game, "mood": mood,
+                             "keywords": keywords, "location": location})
+        if _is_filtered_scene(scene):
+            filtered_count += 1
+        else:
+            ts = _frame_timestamp(frame, fps)
+            gameplay_frames.append((ts, game, scene, location, mood))
+
+    # Aggregate metadata across all frames
+    games = Counter(e["game"] for e in all_entries if e["game"])
+    moods = Counter(e["mood"] for e in all_entries if e["mood"])
+    all_keywords: list[str] = []
+    for e in all_entries:
+        all_keywords.extend(e["keywords"])
+    top_game = games.most_common(1)[0][0] if games else "Unknown"
+    top_mood = moods.most_common(1)[0][0] if moods else ""
+    unique_keywords = sorted(set(all_keywords))[:20]
+
+    # Format duration string
+    dur_h = int(duration // 3600)
+    dur_m = int((duration % 3600) // 60)
+    dur_s = int(duration % 60)
+    duration_fmt = (f"{dur_h:02d}:{dur_m:02d}:{dur_s:02d}" if dur_h
+                    else f"{dur_m:02d}:{dur_s:02d}")
+
+    # Build transcript lines
+    body = [
+        f"Video: {video_file.name}",
+        f"Game: {top_game}",
+        f"Duration: {duration_fmt}",
+        f"Frames analyzed: {len(all_entries)}  ({filtered_count} filtered: loading/menus)",
+        f"Processed: {time.strftime('%Y-%m-%d')}",
+        "",
+        "Scenes:",
+    ]
+    for ts, game, scene, location, mood in gameplay_frames:
+        parts = [p for p in [game, scene, location, mood] if p]
+        body.append(f"[{ts}] {' — '.join(parts)}")
+
+    # Synthesized paragraph summary via text-only LLM call
+    _emit({"type": "summary", "msg": "Generating session summary…"})
+    summary_text = ""
+    if gameplay_frames:
+        try:
+            client = OpenAI(base_url=API_BASE, api_key="lm-studio")
+            desc = "\n".join(
+                f"[{ts}] {game} — {scene}" + (f" — {location}" if location else "")
+                for ts, game, scene, location, mood in gameplay_frames[:50]
+            )
+            resp = client.chat.completions.create(
+                model=MODEL,
+                max_tokens=300,
+                temperature=TEMPERATURE,
+                messages=[{
+                    "role": "user",
+                    "content": (
+                        "Summarize this gaming session in 2-3 sentences based on "
+                        "these frame descriptions:\n\n" + desc
+                    ),
+                }],
+            )
+            summary_text = resp.choices[0].message.content.strip() if resp.choices else ""
+        except Exception as exc:
+            summary_text = f"(summary unavailable: {exc})"
+
+    body += [
+        "",
+        "Summary:",
+        summary_text if summary_text else "(no frames to summarize)",
+        "",
+        f"Keywords: {', '.join(unique_keywords)}" if unique_keywords else "Keywords:",
+    ]
+
+    transcript_path = video_file.parent / f"{video_file.stem}.txt"
+    transcript_path.write_text("\n".join(body), encoding="utf-8")
+
+    # Write one manifest entry for the video file itself
+    video_entry = {
+        "file": str(video_file.resolve()),
+        "cataloged_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "is_video": True,
+        "frames_dir": str(frames_dir.resolve()),
+        "transcript_file": str(transcript_path.resolve()),
+        "game": top_game,
+        "scene": "gameplay session" if all_entries else "unknown",
+        "mood": top_mood,
+        "keywords": unique_keywords,
+    }
+    with open(manifest_path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(video_entry) + "\n")
+
+    _emit({
+        "type": "transcript",
+        "file": str(transcript_path),
+        "filtered": filtered_count,
+        "frames": len(all_entries),
+    })
 
 
 # ── CLI entry point ───────────────────────────────────────
@@ -475,7 +655,11 @@ def main():
     parser.add_argument("--all", action="store_true", help="Re-catalog all files (not just new)")
     parser.add_argument("--files", nargs="*", default=[], help="Explicit file list to catalog")
     parser.add_argument("--threshold", type=float, default=8.0, help="Dupe hash threshold / scene threshold")
-    parser.add_argument("--interval", type=float, default=5.0, help="Video frame interval (seconds)")
+    parser.add_argument("--interval-short", type=float, default=10.0, dest="interval_short", help="Frame interval for short clips <med-min (sec)")
+    parser.add_argument("--interval-med", type=float, default=30.0, dest="interval_med", help="Frame interval for medium clips (sec)")
+    parser.add_argument("--interval-long", type=float, default=60.0, dest="interval_long", help="Frame interval for long recordings (sec)")
+    parser.add_argument("--length-med-min", type=int, default=5, dest="length_med_min", help="Minutes threshold: short→medium")
+    parser.add_argument("--length-long-min", type=int, default=30, dest="length_long_min", help="Minutes threshold: medium→long")
     parser.add_argument("--mode", default="auto", help="Video extraction mode: auto/scene/uniform")
     parser.add_argument("--file", help="Video file path (for --stream-video)")
     args = parser.parse_args()
@@ -497,8 +681,15 @@ def main():
             sys.exit("--stream-video requires --file PATH")
         video_file = Path(args.file)
         manifest_path = Path(args.manifest)
-        stream_video(video_file, manifest_path, mode=args.mode,
-                     threshold=args.threshold, interval=args.interval)
+        stream_video(
+            video_file, manifest_path, mode=args.mode,
+            threshold=args.threshold,
+            interval_short=args.interval_short,
+            interval_med=args.interval_med,
+            interval_long=args.interval_long,
+            length_med_min=args.length_med_min,
+            length_long_min=args.length_long_min,
+        )
         return
 
     scan_dir = Path(args.dir).expanduser().resolve()

@@ -14,22 +14,30 @@ import (
 
 // Settings holds the persistent configuration.
 type Settings struct {
-	APIBase        string  `json:"api_base"`
-	Model          string  `json:"model"`
-	MaxTokens      int     `json:"max_tokens"`
-	Temperature    float64 `json:"temperature"`
-	SceneThreshold float64 `json:"scene_threshold"`
-	FrameInterval  float64 `json:"frame_interval_sec"`
+	APIBase            string  `json:"api_base"`
+	Model              string  `json:"model"`
+	MaxTokens          int     `json:"max_tokens"`
+	Temperature        float64 `json:"temperature"`
+	SceneThreshold     float64 `json:"scene_threshold"`
+	VideoIntervalShort float64 `json:"video_interval_short"`
+	VideoIntervalMed   float64 `json:"video_interval_med"`
+	VideoIntervalLong  float64 `json:"video_interval_long"`
+	VideoLengthMedMin  int     `json:"video_length_med_min"`
+	VideoLengthLongMin int     `json:"video_length_long_min"`
 }
 
 func DefaultSettings() Settings {
 	return Settings{
-		APIBase:        "http://169.254.83.107:1234/v1",
-		Model:          "gemma-4-e4b",
-		MaxTokens:      2048,
-		Temperature:    0.3,
-		SceneThreshold: 0.3,
-		FrameInterval:  5.0,
+		APIBase:            "http://169.254.83.107:1234/v1",
+		Model:              "gemma-4-e4b",
+		MaxTokens:          2048,
+		Temperature:        0.3,
+		SceneThreshold:     0.3,
+		VideoIntervalShort: 10.0,
+		VideoIntervalMed:   30.0,
+		VideoIntervalLong:  60.0,
+		VideoLengthMedMin:  5,
+		VideoLengthLongMin: 30,
 	}
 }
 
@@ -76,7 +84,11 @@ func NewSettingsModel(s Settings, width, height int) SettingsModel {
 		"Max tokens",
 		"Temperature (0.0 – 1.0)",
 		"Scene threshold (0.0 – 1.0)",
-		"Frame interval (seconds)",
+		"Video interval: short clip <5min (sec)",
+		"Video interval: medium clip 5–30min (sec)",
+		"Video interval: long recording >30min (sec)",
+		"Video length threshold: short→medium (min)",
+		"Video length threshold: medium→long (min)",
 	}
 	values := []string{
 		s.APIBase,
@@ -84,7 +96,11 @@ func NewSettingsModel(s Settings, width, height int) SettingsModel {
 		fmt.Sprintf("%d", s.MaxTokens),
 		fmt.Sprintf("%.2f", s.Temperature),
 		fmt.Sprintf("%.2f", s.SceneThreshold),
-		fmt.Sprintf("%.1f", s.FrameInterval),
+		fmt.Sprintf("%.1f", s.VideoIntervalShort),
+		fmt.Sprintf("%.1f", s.VideoIntervalMed),
+		fmt.Sprintf("%.1f", s.VideoIntervalLong),
+		fmt.Sprintf("%d", s.VideoLengthMedMin),
+		fmt.Sprintf("%d", s.VideoLengthLongMin),
 	}
 	fields := make([]textinput.Model, len(labels))
 	for i := range labels {
@@ -140,7 +156,11 @@ func (m SettingsModel) collect() (Settings, error) {
 	fmt.Sscanf(m.fields[2].Value(), "%d", &s.MaxTokens)
 	fmt.Sscanf(m.fields[3].Value(), "%f", &s.Temperature)
 	fmt.Sscanf(m.fields[4].Value(), "%f", &s.SceneThreshold)
-	fmt.Sscanf(m.fields[5].Value(), "%f", &s.FrameInterval)
+	fmt.Sscanf(m.fields[5].Value(), "%f", &s.VideoIntervalShort)
+	fmt.Sscanf(m.fields[6].Value(), "%f", &s.VideoIntervalMed)
+	fmt.Sscanf(m.fields[7].Value(), "%f", &s.VideoIntervalLong)
+	fmt.Sscanf(m.fields[8].Value(), "%d", &s.VideoLengthMedMin)
+	fmt.Sscanf(m.fields[9].Value(), "%d", &s.VideoLengthLongMin)
 	return s, nil
 }
 

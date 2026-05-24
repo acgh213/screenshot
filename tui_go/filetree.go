@@ -242,6 +242,9 @@ func (ft *FileTree) itemStatus(item TreeItem) string {
 		if e.IsFailed() {
 			return styleError.Render("✗")
 		}
+		if e.IsVideo {
+			return stylePeach.Render("▶")
+		}
 		return styleSuccess.Render("✓")
 	}
 	return styleMuted.Render("○")

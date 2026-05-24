@@ -608,7 +608,7 @@ func (m Model) doVideo() (tea.Model, tea.Cmd) {
 	m.cancelFn = cancel
 
 	scanner, cmd, err := LaunchVideoProcess(ctx, sel, m.manifestPath,
-		"auto", m.settings.SceneThreshold, m.settings.FrameInterval)
+		"auto", m.settings.SceneThreshold, m.settings)
 	if err != nil {
 		cancel()
 		m.appendLog(styleError.Render(fmt.Sprintf("⚠  %v", err)))
@@ -779,6 +779,15 @@ func (m *Model) formatProgressLine(msg NdjsonMsg) string {
 		return ts + styleSuccess.Render("  ✓ ") + stylePeach.Render(msg.Name) + styleMuted.Render("  →  ") + gameInfo
 	case "extract":
 		return ts + styleInfo.Render("  ⬡ "+msg.Msg)
+	case "summary":
+		return ts + styleMuted.Render("  ⬡ "+msg.Msg)
+	case "transcript":
+		base := filepath.Base(msg.File)
+		filtered := ""
+		if msg.Filtered > 0 {
+			filtered = fmt.Sprintf("  (%d filtered)", msg.Filtered)
+		}
+		return ts + styleGold.Render("  ◉ transcript written → "+base) + styleMuted.Render(filtered)
 	case "done":
 		return ts + styleSuccess.Render(fmt.Sprintf("  ✓ Done: %d ok", msg.Success)) +
 			styleMuted.Render(fmt.Sprintf(", %d failed", msg.Fail))
@@ -935,6 +944,19 @@ func (m Model) detailView(width int) string {
 	date := ""
 	if len(e.CatalogedAt) >= 10 {
 		date = e.CatalogedAt[:10]
+	}
+	if e.IsVideo {
+		transcriptLine := ""
+		if e.TranscriptFile != "" {
+			transcriptLine = "\n  " + styleMuted.Render("◉ "+filepath.Base(e.TranscriptFile))
+		}
+		return fmt.Sprintf("  %s\n  %s  %s\n  %s%s",
+			stylePeach.Render("▶  "+filepath.Base(sel)),
+			styleLavender.Bold(true).Render(game),
+			styleRose.Italic(true).Render(truncate(e.Mood, 20)),
+			styleMuted.Render(scene+"  "+date),
+			transcriptLine,
+		)
 	}
 	return fmt.Sprintf("  %s\n  %s  %s\n  %s",
 		styleSuccess.Render("✓  "+filepath.Base(sel)),
